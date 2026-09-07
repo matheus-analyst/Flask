@@ -2,7 +2,7 @@
 App Flask Principal — Blog Ciências Contábeis
 Ambiente: Vercel Serverless (Vercel Functions + Python Runtime)
 """
-
+app = Flask(__name__)
 from flask import Flask, jsonify, request, render_template
 import os
 
