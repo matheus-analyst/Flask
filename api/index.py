@@ -18,7 +18,6 @@ posts = [
         "titulo": "Exame do CFC 2025: Guia Definitivo de Aprovação",
         "categoria": "Concursos & Certificação",
         "conteudo": "O Exame de Suficiência do Conselho Federal de Contabilidade (CFC) é a porta de entrada final para o registro profissional do contador. Neste guia abordamos a estrutura P1 e P2, as disciplinas de Contabilidade Geral, Gerencial e Legislação Aplicada. Estratégias de estudo focadas em resolução de provas anteriores são essenciais para a matemática do sucesso contábil.",
-        "curticas": 0,
         "curtidas": 42,
         "comentarios": [
             {"id": 1, "nome": "Ana Beatriz", "texto": "Conteúdo muito esclarecedor! Vou aplicar na minha reta final."}
@@ -32,12 +31,13 @@ posts = [
         "curtidas": 78,
         "comentarios": [
             {"id": 1, "nome": "Rafael Lima", "texto": "Excelente didática para entender a equação fundamental!"}
+        ],
     },
 ]
 
 
 # ---------------------------------------------------------------------------
-# Frontend Renderizado (Índice HTML)
+# Frontend Renderizado
 # ---------------------------------------------------------------------------
 @app.route("/")
 def index():
@@ -116,12 +116,11 @@ def delete_post(post_id):
     if data.get("senha") != ADMIN_PASSWORD:
         return jsonify({"error": "Acesso administrativo negado."}), 401
 
-    global posts
-    initial_len = len(posts)
-    posts = [p for p in posts if p["id"] != post_id]
-    if len(posts) == initial_len:
-        return jsonify({"error": "Post não encontrado."}), 404
-    return jsonify({"message": "Post removido com sucesso."})
+    for i, p in enumerate(posts):
+        if p["id"] == post_id:
+            posts.pop(i)
+            return jsonify({"message": "Post removido com sucesso."})
+    return jsonify({"error": "Post não encontrado."}), 404
 
 
 # Exposição correta para o Runtime Serverless da Vercel
