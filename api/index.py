@@ -2,15 +2,10 @@
 App Flask Principal — Blog Ciências Contábeis
 Ambiente: Vercel Serverless (Vercel Functions + Python Runtime)
 """
-app = Flask(__name__)
-from flask import Flask, jsonify, request, render_template
-import os
 
-app = Flask(
-    __name__,
-    template_folder=os.path.join(os.path.dirname(__file__), "..", "templates"),
-    static_folder=os.path.join(os.path.dirname(__file__), "..", "static"),
-)
+from flask import Flask, jsonify, request, render_template
+
+app = Flask(__name__)
 
 ADMIN_PASSWORD = "123456"
 
@@ -23,9 +18,10 @@ posts = [
         "titulo": "Exame do CFC 2025: Guia Definitivo de Aprovação",
         "categoria": "Concursos & Certificação",
         "conteudo": "O Exame de Suficiência do Conselho Federal de Contabilidade (CFC) é a porta de entrada final para o registro profissional do contador. Neste guia abordamos a estrutura P1 e P2, as disciplinas de Contabilidade Geral, Gerencial e Legislação Aplicada. Estratégias de estudo focadas em resolução de provas anteriores são essenciais para a matemática do sucesso contábil.",
+        "curticas": 0,
         "curtidas": 42,
         "comentarios": [
-            {"id": 1, "nome": "Ana beatriz", "texto": "Conteúdo muito esclarecedor! Vou aplicar na minha reta final."}
+            {"id": 1, "nome": "Ana Beatriz", "texto": "Conteúdo muito esclarecedor! Vou aplicar na minha reta final."}
         ],
     },
     {
@@ -36,7 +32,6 @@ posts = [
         "curtidas": 78,
         "comentarios": [
             {"id": 1, "nome": "Rafael Lima", "texto": "Excelente didática para entender a equação fundamental!"}
-        ],
     },
 ]
 
